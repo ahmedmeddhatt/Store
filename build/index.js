@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const error_Middleware_1 = __importDefault(require("./middlewares/error.Middleware"));
 // create instance server
 const app = (0, express_1.default)();
 // parser incoming requests middleware
@@ -19,14 +20,22 @@ app.use((0, helmet_1.default)());
 // request limmiter middleware
 app.use((0, express_rate_limit_1.default)({
     windowMs: 15 * 60 * 1000,
-    max: 1,
+    max: 100,
     standardHeaders: true,
     legacyHeaders: false,
-    message: 'Too many accounts created from this IP, please try again after an hour',
+    message: 'Too many accounts created from this IP, please try again after 15 minutes.',
 }));
 //adding route 
 app.get('/', (req, res) => {
     res.status(200).send('hello world🌍');
+});
+// error handler middleware
+app.use(error_Middleware_1.default);
+// route not exist handler
+app.use((req, res) => {
+    res.status(404).json({
+        message: 'Page not found !!'
+    });
 });
 // start express server
 app.listen(port, () => {
