@@ -3,6 +3,24 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import rateLimit from 'express-rate-limit'
 import errorMiddleware from './middlewares/error.Middleware'
+import config from './config'
+import db from './database/index'
+import { Client } from 'pg'
+
+db.connect().then((Client)=>{
+    return Client.query('SELECT NOW()').then((res)=>{
+        Client.release();
+        console.log(res.rows);
+        
+    }).catch((err)=>{
+        Client.release();
+        console.log(err.stack);
+        
+    })
+})
+
+
+console.log(config);
 
 // create instance server
 const app:Application = express()
@@ -11,7 +29,7 @@ const app:Application = express()
 app.use(express.json())
 
 
-const port = 3000
+const Port = config.port || 3000
 
 // http request logger middleware
 app.use(morgan('common'))
@@ -46,8 +64,8 @@ app.use((req:Request, res:Response)=>{
     })
 })
 // start express server
-app.listen(port , ()=>{
-    console.log(`Server is starting at port : ${port}`);
+app.listen(Port , ()=>{
+    console.log(`Server is starting at port : ${Port}`);
     
 })
 

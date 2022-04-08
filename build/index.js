@@ -8,11 +8,23 @@ const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const error_Middleware_1 = __importDefault(require("./middlewares/error.Middleware"));
+const config_1 = __importDefault(require("./config"));
+const index_1 = __importDefault(require("./database/index"));
+index_1.default.connect().then((Client) => {
+    return Client.query('SELECT NOW()').then((res) => {
+        Client.release();
+        console.log(res.rows);
+    }).catch((err) => {
+        Client.release();
+        console.log(err.stack);
+    });
+});
+console.log(config_1.default);
 // create instance server
 const app = (0, express_1.default)();
 // parser incoming requests middleware
 app.use(express_1.default.json());
-const port = 3000;
+const Port = config_1.default.port || 3000;
 // http request logger middleware
 app.use((0, morgan_1.default)('common'));
 // http security middleware
@@ -38,7 +50,7 @@ app.use((req, res) => {
     });
 });
 // start express server
-app.listen(port, () => {
-    console.log(`Server is starting at port : ${port}`);
+app.listen(Port, () => {
+    console.log(`Server is starting at port : ${Port}`);
 });
 exports.default = app;
