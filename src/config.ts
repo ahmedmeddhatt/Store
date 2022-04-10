@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const {
+const {PORT,
     ENV ,
      POSTGRES_HOST ,
       POSTGRES_PORT ,
@@ -14,7 +14,7 @@ const {
 } = process.env;
 
 export default {
-    port : POSTGRES_PORT ,
+    port : PORT ,
     host : POSTGRES_HOST ,
     dbPort : POSTGRES_HOST ,
     database :ENV === 'dev' ? POSTGRES_DB : POSTGRES_DB_TEST ,

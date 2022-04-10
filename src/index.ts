@@ -5,7 +5,7 @@ import rateLimit from 'express-rate-limit'
 import errorMiddleware from './middlewares/error.Middleware'
 import config from './config'
 import db from './database/index'
-import { Client } from 'pg'
+import routes from './routes'
 
 db.connect().then((Client)=>{
     return Client.query('SELECT NOW()').then((res)=>{
@@ -48,6 +48,9 @@ app.use(
 		'Too many accounts created from this IP, please try again after 15 minutes.',
     })
 )
+
+
+app.use('/api', routes)
 //adding route 
 app.get('/',(req:Request, res:Response)=>{
 res.status(200).send('hello world🌍')

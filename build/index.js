@@ -10,6 +10,7 @@ const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const error_Middleware_1 = __importDefault(require("./middlewares/error.Middleware"));
 const config_1 = __importDefault(require("./config"));
 const index_1 = __importDefault(require("./database/index"));
+const routes_1 = __importDefault(require("./routes"));
 index_1.default.connect().then((Client) => {
     return Client.query('SELECT NOW()').then((res) => {
         Client.release();
@@ -37,6 +38,7 @@ app.use((0, express_rate_limit_1.default)({
     legacyHeaders: false,
     message: 'Too many accounts created from this IP, please try again after 15 minutes.',
 }));
+app.use('/api', routes_1.default);
 //adding route 
 app.get('/', (req, res) => {
     res.status(200).send('hello world🌍');
