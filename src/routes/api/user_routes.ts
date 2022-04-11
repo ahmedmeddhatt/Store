@@ -10,16 +10,16 @@ const routes = Router()
 // api/users
 
 routes.route('/')
-.get(validator,api.getMany)
-.post(api.Create) ;
+.get(validator , api.getMany)
+.post(validator , api.Create) ;
 
 
 // api/users/id
 
 routes.route('/:id')
-.get(api.getOne)
-.put(api.updateOne)
-.delete(api.deleteOne)
+.get(validator , api.getOne)
+.put(validator , api.updateOne)
+.delete(validator , api.deleteOne)
 
 //login
 routes.post('/login', api.authentication)
