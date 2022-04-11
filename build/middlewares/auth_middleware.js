@@ -13,27 +13,22 @@ const authError = (next) => {
 const validator = (req, res, next) => {
     try {
         const authHeader = req.get('Authorization');
-        console.log(authHeader, 'authHeader');
         if (authHeader) {
             const bearer = authHeader.split(' ')[0];
             const token = authHeader.split(' ')[1];
             console.log('bearer', bearer);
             if (token && bearer === 'Bearer') {
-                console.log(token && bearer, 'decode');
                 const decode = jsonwebtoken_1.default.verify(token, config_1.default.tokenSecret);
-                console.log(decode, 'decode');
                 if (decode) {
                     next();
                 }
                 else {
                     // failed to authenticate user
-                    console.log('nextttt');
                     authError(next);
                 }
             }
             else {
                 //token type not bearer
-                console.log('ahu');
                 authError(next);
             }
         }

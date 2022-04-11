@@ -11,12 +11,12 @@ const routes = (0, express_1.Router)();
 // api/users
 routes.route('/')
     .get(auth_middleware_1.default, user_controller_1.default.getMany)
-    .post(user_controller_1.default.Create);
+    .post(auth_middleware_1.default, user_controller_1.default.Create);
 // api/users/id
 routes.route('/:id')
-    .get(user_controller_1.default.getOne)
-    .put(user_controller_1.default.updateOne)
-    .delete(user_controller_1.default.deleteOne);
+    .get(auth_middleware_1.default, user_controller_1.default.getOne)
+    .put(auth_middleware_1.default, user_controller_1.default.updateOne)
+    .delete(auth_middleware_1.default, user_controller_1.default.deleteOne);
 //login
 routes.post('/login', user_controller_1.default.authentication);
 exports.default = routes;

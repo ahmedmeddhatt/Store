@@ -1,5 +1,5 @@
 import { Request ,Response, NextFunction } from "express";
-import UserModel from "../modules/user_model";
+import UserModel from "../models/user_model";
 import  Jwt  from "jsonwebtoken";
 import config from "../config";
 
