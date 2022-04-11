@@ -3,7 +3,19 @@ import  api from '../../controllers/user_controller'
 const routes = Router()
 
 //adding route 
-routes.get('/', api.get)
-routes.post('/', api.Create)
+
+// api/users
+
+routes.route('/')
+.get(api.getMany)
+.post(api.Create) ;
+
+
+// api/users/id
+
+routes.route('/:id')
+.get(api.getOne)
+.put(api.updateOne)
+.delete(api.deleteOne)
 
 export default routes

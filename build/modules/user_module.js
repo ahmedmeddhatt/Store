@@ -21,7 +21,7 @@ class userModel {
                 // connect to db
                 const connection = yield database_1.default.connect();
                 const sql = `INSERT INTO users (email , user_name ,first_name ,last_name ,password)  
-            values ($1 ,$2 ,$3 ,$4 ,$5) returning *`;
+            values ($1 ,$2 ,$3 ,$4 ,$5) returning id,email , user_name ,first_name ,last_name`;
                 // run query 
                 const data = yield connection.query(sql, [
                     u.email, u.user_name, u.first_name, u.last_name, u.password

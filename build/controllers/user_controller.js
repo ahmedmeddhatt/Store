@@ -12,12 +12,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_module_1 = __importDefault(require("../modules/user_module"));
-const user = new user_module_1.default();
+const user_model_1 = __importDefault(require("../modules/user_model"));
+const user = new user_model_1.default();
+// GET ALL
+const getMany = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield user.getMany();
+        res.status(200).json({ Results: data.length, status: 'success', data,
+            message: `All Users Reviewed successfully` });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+//GET ONE
+const getOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield user.getOne(req.params.id); // as unknown
+        res.status(200).json({ status: 'success', data, message: `User Reviewed successfully` });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+//CREATE
 const Create = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield user.create(req.body);
-        res.status(201).json({ status: 'success', data });
+        res.status(201).json({ status: 'success', data, message: `User Created successfully` });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+//UPDATE
+const updateOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield user.updateOne(req.body);
+        res.status(201).json({ status: 'success', data, message: `User Updated successfully` });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+//DELETE
+const deleteOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield user.deleteOne(req.params.id); // as unknown
+        res.status(200).json({ status: 'success', message: `User Deleted successfully` });
     }
     catch (error) {
         next(error);
@@ -26,4 +68,9 @@ const Create = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
 const get = (req, res) => {
     res.status(200).send('hello world🌍');
 };
-exports.default = { Create, get };
+exports.default = { Create,
+    getMany,
+    getOne,
+    updateOne,
+    deleteOne
+};

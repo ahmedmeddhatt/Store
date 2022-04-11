@@ -7,6 +7,13 @@ const express_1 = require("express");
 const user_controller_1 = __importDefault(require("../../controllers/user_controller"));
 const routes = (0, express_1.Router)();
 //adding route 
-routes.get('/', user_controller_1.default.get);
-routes.post('/', user_controller_1.default.Create);
+// api/users
+routes.route('/')
+    .get(user_controller_1.default.getMany)
+    .post(user_controller_1.default.Create);
+// api/users/id
+routes.route('/:id')
+    .get(user_controller_1.default.getOne)
+    .put(user_controller_1.default.updateOne)
+    .delete(user_controller_1.default.deleteOne);
 exports.default = routes;

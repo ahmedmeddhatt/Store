@@ -9,7 +9,9 @@ const {PORT,
       POSTGRES_DB ,
       POSTGRES_DB_TEST ,
       POSTGRES_USER  ,
-      POSTGRES_PASSWORD 
+      POSTGRES_PASSWORD ,
+      BCRYPT_PASSWORD ,
+      SALT
 
 } = process.env;
 
@@ -19,5 +21,7 @@ export default {
     dbPort : POSTGRES_HOST ,
     database :ENV === 'dev' ? POSTGRES_DB : POSTGRES_DB_TEST ,
     user : POSTGRES_USER ,
-    password : POSTGRES_PASSWORD
+    password : POSTGRES_PASSWORD ,
+    pepper : BCRYPT_PASSWORD ,
+    salt  : SALT
 };
