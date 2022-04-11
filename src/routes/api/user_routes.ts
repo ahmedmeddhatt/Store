@@ -1,13 +1,16 @@
 import { Router , Request ,Response } from "express";
 import  api from '../../controllers/user_controller'
+import validator from "../../middlewares/auth_middleware";
+
 const routes = Router()
+
 
 //adding route 
 
 // api/users
 
 routes.route('/')
-.get(api.getMany)
+.get(validator,api.getMany)
 .post(api.Create) ;
 
 
