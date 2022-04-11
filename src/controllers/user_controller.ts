@@ -1,5 +1,7 @@
 import { Request ,Response, NextFunction } from "express";
 import UserModel from "../modules/user_model";
+import  Jwt  from "jsonwebtoken";
+import config from "../config";
 
 const user = new UserModel()
 
@@ -59,7 +61,7 @@ const updateOne = async (req:Request, res:Response , next:NextFunction)=>{
 //DELETE
 const deleteOne = async (req:Request, res:Response , next:NextFunction)=>{
         try {
-            const data = await user.deleteOne(req.params.id as string); // as unknown
+             await user.deleteOne(req.params.id as string); // as unknown
             res.status(200).json({ status: 'success' , message:`User Deleted successfully`})
             
         } catch (error) {
@@ -70,6 +72,27 @@ const deleteOne = async (req:Request, res:Response , next:NextFunction)=>{
 
 
 
+//AUTHENTICATION
+const authentication = async (req:Request, res:Response , next:NextFunction)=>{
+    try {
+        const {email, password} = req.body
+        const data = await user.authenticate(email, password as string); // as unknown
+        const token = Jwt.sign({ user}, config.tokenSecret as string)
+        if(!data){
+
+            res.status(401).json({ status: 'error' ,
+             message:` Wrong Username or Password, Please tyr again !!`})
+        }
+
+        res.status(200).json({ status: 'success' ,data:{...data ,token} ,
+         message:`User Authenticated successfully`})
+
+        
+    } catch (error) {
+        return next(error)
+    }
+
+}
 
     
 
@@ -80,5 +103,6 @@ export default {Create,
         getMany ,
         getOne ,
         updateOne ,
-        deleteOne
+        deleteOne ,
+        authentication
 }

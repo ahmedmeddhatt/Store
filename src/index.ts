@@ -20,7 +20,7 @@ db.connect().then((Client)=>{
 })
 
 
-console.log(config);
+
 
 // create instance server
 const app:Application = express()

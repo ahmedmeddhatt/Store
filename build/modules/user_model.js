@@ -53,7 +53,7 @@ class userModel {
                 const data = yield connection.query(sql);
                 // release connection
                 connection.release();
-                // return created user
+                // return all users
                 return data.rows;
             }
             catch (error) {
@@ -72,7 +72,7 @@ class userModel {
                 const data = yield connection.query(sql, [id]);
                 // release connection
                 connection.release();
-                // return created user
+                // return user of the id
                 return data.rows[0];
             }
             catch (error) {
@@ -95,7 +95,7 @@ class userModel {
                 ]);
                 // release connection
                 connection.release();
-                // return created user
+                // return updated user
                 return data.rows[0];
             }
             catch (error) {
@@ -116,11 +116,38 @@ class userModel {
                 const data = yield connection.query(sql, [id]);
                 // release connection
                 connection.release();
-                // return created user
+                // return deleting message
                 return data.rows[0];
             }
             catch (error) {
                 throw new Error(`Can not delete user id ( ${id} ) , ${error.message}`);
+            }
+        });
+    }
+    // authenticate user
+    authenticate(email, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // connect to db
+                const connection = yield database_1.default.connect();
+                const sql = `SELECT password FROM users where email = $1`;
+                // run query 
+                const data = yield connection.query(sql, [email]);
+                if (data.rows.length) {
+                    const { password: hashPassword } = data.rows[0];
+                    const isPasswordIsValid = bcrypt_1.default.compareSync(`${password}${config_1.default.pepper}`, hashPassword);
+                    if (isPasswordIsValid) {
+                        const validData = yield connection.query(`SELECT id , email , user_name ,first_name ,last_name FROM users where email = ($1)`, [email]);
+                        // return authenticated user
+                        return validData.rows[0];
+                    }
+                }
+                // release connection
+                connection.release();
+                return null;
+            }
+            catch (error) {
+                throw new Error(`Unable to login : ${error.message}`);
             }
         });
     }

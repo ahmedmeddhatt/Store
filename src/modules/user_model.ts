@@ -43,7 +43,7 @@ class userModel {
              const data = await connection.query(sql) ;
               // release connection
               connection.release();
-              // return created user
+              // return all users
               return data.rows ;
             
         } catch (error) {
@@ -63,7 +63,7 @@ class userModel {
              const data = await connection.query(sql , [id]) ;
               // release connection
               connection.release();
-              // return created user
+              // return user of the id
               return data.rows[0] ;
             
         } catch (error) {
@@ -88,7 +88,7 @@ class userModel {
         ]) ;
           // release connection
           connection.release();
-          // return created user
+          // return updated user
           return data.rows[0] ;
         
     } catch (error) {
@@ -112,7 +112,7 @@ class userModel {
              const data = await connection.query(sql ,  [id]) ;
               // release connection
               connection.release();
-              // return created user
+              // return deleting message
               return data.rows[0] ;
             
         } catch (error) {

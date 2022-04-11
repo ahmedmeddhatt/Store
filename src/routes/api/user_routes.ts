@@ -18,4 +18,7 @@ routes.route('/:id')
 .put(api.updateOne)
 .delete(api.deleteOne)
 
+//login
+routes.post('/login', api.authentication)
+
 export default routes

@@ -13,6 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = __importDefault(require("../modules/user_model"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const config_1 = __importDefault(require("../config"));
 const user = new user_model_1.default();
 // GET ALL
 const getMany = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -58,19 +60,34 @@ const updateOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function
 //DELETE
 const deleteOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield user.deleteOne(req.params.id); // as unknown
+        yield user.deleteOne(req.params.id); // as unknown
         res.status(200).json({ status: 'success', message: `User Deleted successfully` });
     }
     catch (error) {
         next(error);
     }
 });
-const get = (req, res) => {
-    res.status(200).send('hello world🌍');
-};
+//AUTHENTICATION
+const authentication = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        const data = yield user.authenticate(email, password); // as unknown
+        const token = jsonwebtoken_1.default.sign({ user }, config_1.default.tokenSecret);
+        if (!data) {
+            res.status(401).json({ status: 'error',
+                message: ` Wrong Username or Password, Please tyr again !!` });
+        }
+        res.status(200).json({ status: 'success', data: Object.assign(Object.assign({}, data), { token }),
+            message: `User Authenticated successfully` });
+    }
+    catch (error) {
+        return next(error);
+    }
+});
 exports.default = { Create,
     getMany,
     getOne,
     updateOne,
-    deleteOne
+    deleteOne,
+    authentication
 };

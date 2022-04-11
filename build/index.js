@@ -20,7 +20,6 @@ index_1.default.connect().then((Client) => {
         console.log(err.stack);
     });
 });
-console.log(config_1.default);
 // create instance server
 const app = (0, express_1.default)();
 // parser incoming requests middleware
