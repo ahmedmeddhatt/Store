@@ -31,6 +31,7 @@ class userModel {
             )
         }
     }
+
     // get all users
     async getMany():Promise<User[]>{
         try {
@@ -119,6 +120,40 @@ class userModel {
         }
     
      }
+
+
+// authenticate user
+async authenticate(email: string ,password: string):Promise<User | null>{
+    try {
+        // connect to db
+        const connection = await db.connect() ;
+        const sql = `SELECT password FROM users where email = $1` ;
+
+         // run query 
+         const data = await connection.query(sql, [email]) ;
+         if (data.rows.length){
+             const { password: hashPassword}= data.rows[0]
+             const isPasswordIsValid = 
+             bcrypt.compareSync(`${password}${config.pepper}`, hashPassword);
+
+             if( isPasswordIsValid){
+                 const validData = await connection.query
+                 (`SELECT id , email , user_name ,first_name ,last_name FROM users where email = ($1)`, [email])
+                 
+                 // return authenticated user
+                 return validData.rows[0] ;
+                }
+        }
+          // release connection
+          connection.release();
+          return null
+
+        
+    } catch (error) {
+        throw new Error (`Unable to login : ${(error as Error).message}`)
+    }
+}
+
 
 }
 

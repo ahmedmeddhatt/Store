@@ -73,9 +73,7 @@ const deleteOne = async (req:Request, res:Response , next:NextFunction)=>{
 
     
 
-    const get = (req:Request, res:Response)=>{
-        res.status(200).send('hello world🌍')
-        }
+
 
 
 export default {Create,
