@@ -19,7 +19,7 @@ const database_1 = __importDefault(require("../../database"));
 const user = new user_model_1.default();
 const request = (0, supertest_1.default)(index_1.default);
 let token = '';
-describe('User model logic', () => {
+describe('User model routes', () => {
     const newUser = {
         "email": "ahmedmedhaat@com",
         "user_name": "Ahmed Medhat",

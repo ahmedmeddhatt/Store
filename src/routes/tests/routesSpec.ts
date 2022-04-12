@@ -9,7 +9,7 @@ const request = supertest(app);
 let token = '' ;
 
 
-describe('User model logic',()=>{
+describe('User model routes',()=>{
     const newUser = {
         "email":"ahmedmedhaat@com",
         "user_name":"Ahmed Medhat" ,
