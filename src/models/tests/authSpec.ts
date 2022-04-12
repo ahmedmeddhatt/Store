@@ -15,7 +15,7 @@ describe('Authentication route',() =>{
 
 describe('Authentication logic',()=>{
     const newUser = {
-        "email":"ahmedmedht@com",
+        "email":"ahmedmedhaat@com",
         "user_name":"Ahmed Medhat" ,
         "first_name":"Ahmed" ,
         "last_name":"Medhat" ,
@@ -30,7 +30,32 @@ describe('Authentication logic',()=>{
 
 
     afterAll(async ()=>{
-         const connection = await db.connect();
-
+        const connection = await db.connect();
+        const sql = 'DELETE FROM users;'
+        await connection.query(sql)
+        connection.release()
     })
+
+
+         it('should have user data from authentication method', async ()=>{
+             const userData =await user.authenticate(
+                newUser.email , newUser.password as string
+             ) ;
+             expect(userData?.email).toBe(newUser.email) ;
+             expect(userData?.user_name).toBe(newUser.user_name) ;
+             expect(userData?.first_name).toBe(newUser.first_name) ;
+             expect(userData?.last_name).toBe(newUser.last_name) ;
+            
+        }) ;
+
+        it('should return null from authentication method', async ()=>{
+            const userData =await user.authenticate(
+               'wrongemail.com' , 'wrongpassword'
+            ) ;
+            expect(userData).toBe(null) ;
+            
+        }) ;
+        
 })
+
+       
