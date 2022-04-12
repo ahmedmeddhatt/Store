@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool  } from "pg";
 import config from "../config";
 
 const pool = new Pool ({
@@ -8,6 +8,9 @@ const pool = new Pool ({
     user : config.user ,
     password : config.password
 })
+
+
+ 
 
 pool.on('error', (error : Error)=>{
     console.error(error.message)
