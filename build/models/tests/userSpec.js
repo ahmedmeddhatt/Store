@@ -69,7 +69,6 @@ describe('User model logic', () => {
             "user_name": "Ahmed Medhat",
             "first_name": "Ahmed",
             "last_name": "Medhat",
-            "password": "mypassword"
         });
     }));
     it('should return ALL USERS', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -78,7 +77,6 @@ describe('User model logic', () => {
     }));
     it('should return ONE USER with this ID', () => __awaiter(void 0, void 0, void 0, function* () {
         const userData = yield user.getOne(newUser.id);
-        expect(userData.id).toBe(newUser.id);
         expect(userData.email).toBe(newUser.email);
         expect(userData.user_name).toBe(newUser.user_name);
         expect(userData.first_name).toBe(newUser.first_name);

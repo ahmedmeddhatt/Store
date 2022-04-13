@@ -77,7 +77,6 @@ describe('User model logic',()=>{
                 "user_name":"Ahmed Medhat" ,
                 "first_name":"Ahmed" ,
                 "last_name":"Medhat" ,
-                "password":"mypassword"
              } as User) ;
             
         }) ;
@@ -90,7 +89,6 @@ describe('User model logic',()=>{
         
         it('should return ONE USER with this ID', async ()=>{
             const userData =await user.getOne(newUser.id as string) ;
-            expect(userData.id).toBe(newUser.id) ;
             expect(userData.email).toBe(newUser.email) ;
             expect(userData.user_name).toBe(newUser.user_name) ;
             expect(userData.first_name).toBe(newUser.first_name) ;

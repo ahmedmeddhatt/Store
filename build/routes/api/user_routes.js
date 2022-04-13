@@ -11,7 +11,7 @@ const routes = (0, express_1.Router)();
 // api/users
 routes.route('/')
     .get(auth_middleware_1.default, user_controller_1.default.getMany)
-    .post(auth_middleware_1.default, user_controller_1.default.Create);
+    .post(user_controller_1.default.Create);
 // api/users/id
 routes.route('/:id')
     .get(auth_middleware_1.default, user_controller_1.default.getOne)

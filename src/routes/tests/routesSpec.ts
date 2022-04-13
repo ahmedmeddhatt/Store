@@ -9,7 +9,7 @@ const request = supertest(app);
 let token = '' ;
 
 
-describe('User model routes',()=>{
+describe('ROUTES',()=>{
     const newUser = {
         "id":"0" ,
         "email":"ahmedmedhaat@com",
@@ -104,7 +104,7 @@ describe('CRUD API METHODS',()=>{
             .set('Authorization',`Bearer ${token}`)
             
              expect(res.status).toBe(200) ;
-             expect(res.body.data.length).toBe(1) ;
+             expect(res.body.data.length).toBe(2) ;
         }) ;
         
 
@@ -115,6 +115,7 @@ describe('CRUD API METHODS',()=>{
             
              expect(res.status).toBe(200) ;
              expect(res.body.data.user_name).toBe('Ahmed Medhat') ;
+            //  expect(res.body.data.id).toBe(newUser.id) ;
         }) ;
         
         

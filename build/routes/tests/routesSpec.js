@@ -19,7 +19,7 @@ const database_1 = __importDefault(require("../../database"));
 const user = new user_model_1.default();
 const request = (0, supertest_1.default)(index_1.default);
 let token = '';
-describe('User model routes', () => {
+describe('ROUTES', () => {
     const newUser = {
         "id": "0",
         "email": "ahmedmedhaat@com",
@@ -87,7 +87,7 @@ describe('User model routes', () => {
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
-            expect(res.body.data.length).toBe(1);
+            expect(res.body.data.length).toBe(2);
         }));
         it('should return ONE USER', () => __awaiter(void 0, void 0, void 0, function* () {
             const res = yield request.get(`/api/users/${newUser.id}`)
@@ -95,6 +95,7 @@ describe('User model routes', () => {
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
             expect(res.body.data.user_name).toBe('Ahmed Medhat');
+            //  expect(res.body.data.id).toBe(newUser.id) ;
         }));
         it('should UPDATE THE USER', () => __awaiter(void 0, void 0, void 0, function* () {
             const res = yield request.put(`/api/users/${newUser.id}`)

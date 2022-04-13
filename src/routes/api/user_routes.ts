@@ -11,7 +11,7 @@ const routes = Router()
 
 routes.route('/')
 .get(validator , api.getMany)
-.post(validator , api.Create) ;
+.post( api.Create) ;
 
 
 // api/users/id
