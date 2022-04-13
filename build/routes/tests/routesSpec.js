@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
-const index_1 = __importDefault(require("../index"));
+const index_1 = __importDefault(require("../../index"));
 const user_model_1 = __importDefault(require("../../models/user_model"));
 const database_1 = __importDefault(require("../../database"));
 const user = new user_model_1.default();
@@ -69,15 +69,15 @@ describe('User model routes', () => {
             const res = yield request.post('/api/users/')
                 .set('Content-type', 'application/json')
                 .send({
-                "email": "ahmedd@com",
+                "email": "ahmedd@medhat.com",
                 "user_name": "Ahmed Medhat",
                 "first_name": "Ahmed",
                 "last_name": "Medhat",
                 "password": "mypassword"
             });
-            expect(res.status).toBe(200);
+            expect(res.status).toBe(201);
             const { email, user_name, first_name, last_name } = res.body.data;
-            expect(email).toBe("ahmedd@com");
+            expect(email).toBe("ahmedd@medhat.com");
             expect(user_name).toBe("Ahmed Medhat");
             expect(first_name).toBe("Ahmed");
             expect(last_name).toBe("Medhat");
@@ -87,7 +87,7 @@ describe('User model routes', () => {
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
-            expect(res.body.data.length).toBe(2);
+            expect(res.body.data.length).toBe(1);
         }));
         it('should return ONE USER', () => __awaiter(void 0, void 0, void 0, function* () {
             const res = yield request.get(`/api/users/${newUser.id}`)
@@ -101,11 +101,11 @@ describe('User model routes', () => {
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send(Object.assign(Object.assign({}, newUser), { first_name: "name" }));
-            expect(res.status).toBe(200);
+            expect(res.status).toBe(201);
             const { id, email, user_name, first_name, last_name } = res.body.data;
             expect(id).toBe(newUser.id);
             expect(email).toBe(newUser.email);
-            expect(user_name).toBe(newUser.first_name);
+            expect(user_name).toBe(newUser.user_name);
             expect(first_name).toBe("name");
             expect(last_name).toBe(newUser.last_name);
         }));
@@ -114,7 +114,6 @@ describe('User model routes', () => {
                 .set('Content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
             expect(res.status).toBe(200);
-            expect(res.body.data.id).toBe(newUser.id);
         }));
     });
 });

@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import app from "../index";
+import app from "../../index";
 import userModel from "../../models/user_model";
 import db from '../../database'
 import User from "../../types/user_type";
@@ -81,7 +81,7 @@ describe('CRUD API METHODS',()=>{
             const res = await request.post('/api/users/')
             .set('Content-type','application/json')
             .send({
-                "email":"ahmedd@com",
+                "email":"ahmedd@medhat.com",
                 "user_name":"Ahmed Medhat" ,
                 "first_name":"Ahmed" ,
                 "last_name":"Medhat" ,
@@ -90,9 +90,9 @@ describe('CRUD API METHODS',()=>{
              } as User) ;
 
 
-             expect(res.status).toBe(200) ;
+             expect(res.status).toBe(201) ;
              const {email , user_name , first_name , last_name } = res.body.data ;
-             expect(email).toBe("ahmedd@com") ;
+             expect(email).toBe("ahmedd@medhat.com") ;
              expect(user_name).toBe("Ahmed Medhat") ;
              expect(first_name).toBe("Ahmed") ;
              expect(last_name).toBe("Medhat") ;
@@ -104,7 +104,7 @@ describe('CRUD API METHODS',()=>{
             .set('Authorization',`Bearer ${token}`)
             
              expect(res.status).toBe(200) ;
-             expect(res.body.data.length).toBe(2) ;
+             expect(res.body.data.length).toBe(1) ;
         }) ;
         
 
@@ -127,11 +127,11 @@ describe('CRUD API METHODS',()=>{
                 first_name:"name"
             })
             
-             expect(res.status).toBe(200) ;
+             expect(res.status).toBe(201) ;
              const {id ,email , user_name , first_name , last_name } = res.body.data ;
              expect(id).toBe(newUser.id) ;
              expect(email).toBe(newUser.email) ;
-             expect(user_name).toBe(newUser.first_name) ;
+             expect(user_name).toBe(newUser.user_name) ;
              expect(first_name).toBe("name") ;
              expect(last_name).toBe(newUser.last_name) ;
         }) ;
@@ -143,7 +143,6 @@ describe('CRUD API METHODS',()=>{
             .set('Authorization',`Bearer ${token}`)
             
              expect(res.status).toBe(200) ;
-             expect(res.body.data.id).toBe(newUser.id) ;
         }) ;
 })
 
