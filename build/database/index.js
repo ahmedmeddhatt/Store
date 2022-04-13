@@ -8,7 +8,7 @@ const config_1 = __importDefault(require("../config"));
 const pool = new pg_1.Pool({
     host: config_1.default.host,
     port: parseInt(config_1.default.dbPort, 10),
-    database: config_1.default.database,
+    database: (config_1.default.env === 'dev') ? config_1.default.database : config_1.default.database_test,
     user: config_1.default.user,
     password: config_1.default.password
 });

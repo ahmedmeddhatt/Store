@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "npm run build && node build/index.js",
     "migration:run": "db-migrate up",
-    "test": "set ENV=test && tsc && db-migrate up --env test&& tsc && jasmine && db-migrate reset",
+    "test": "set ENV=test&& npx db-migrate --env test up && npm run build && jasmine && npx db-migrate --env test reset",
     "format": "prettier --write src/**/*.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix"

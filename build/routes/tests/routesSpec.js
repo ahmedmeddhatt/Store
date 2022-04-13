@@ -21,6 +21,7 @@ const request = (0, supertest_1.default)(index_1.default);
 let token = '';
 describe('User model routes', () => {
     const newUser = {
+        "id": "0",
         "email": "ahmedmedhaat@com",
         "user_name": "Ahmed Medhat",
         "first_name": "Ahmed",
@@ -38,6 +39,7 @@ describe('User model routes', () => {
         connection.release();
     }));
     describe("AUTHENTICATION METHOD", () => {
+        console.log(newUser, 'newUser');
         it('should return TOKEN with user data', () => __awaiter(void 0, void 0, void 0, function* () {
             const res = yield request.post('/api/users/login')
                 .set('Content-type', 'application/json')
@@ -45,6 +47,7 @@ describe('User model routes', () => {
                 "email": "ahmedmedhaat@com",
                 "password": "mypassword"
             });
+            console.log(newUser, 'newUser');
             expect(res.status).toBe(200);
             const { id, email, token: userToken } = res.body.data;
             expect(id).toBe(newUser.id);

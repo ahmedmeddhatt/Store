@@ -11,6 +11,7 @@ const error_Middleware_1 = __importDefault(require("./middlewares/error.Middlewa
 const config_1 = __importDefault(require("./config"));
 const index_1 = __importDefault(require("./database/index"));
 const routes_1 = __importDefault(require("./routes"));
+console.log(process.env.ENV, 'okkkk');
 index_1.default.connect().then((Client) => {
     return Client.query('SELECT NOW()').then((res) => {
         Client.release();
