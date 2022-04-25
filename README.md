@@ -24,7 +24,8 @@ The database schema and and API route information can be found in the [REQUIREME
 
 ## Database diagram
 
-![database_diagram](database_diagram.jpg)
+![Database Diagram](https://user-images.githubusercontent.com/83477647/165020178-20807a29-de77-4275-bff4-880a3590d6bc.png)
+
 
 ## Project build depended on
 
