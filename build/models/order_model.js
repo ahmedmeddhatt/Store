@@ -33,13 +33,13 @@ class orderModel {
         });
     }
     // get all orders
-    getMany(user_id) {
+    getMany() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 // connect to db
                 const connection = yield database_1.default.connect();
                 // run query 
-                const data = yield connection.query('SELECT * FROM orders WHERE user_id = $1 ', [user_id]);
+                const data = yield connection.query('SELECT * FROM orders');
                 // release connection
                 connection.release();
                 // return all orders

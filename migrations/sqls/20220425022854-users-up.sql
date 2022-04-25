@@ -1,4 +1,4 @@
--- create table users
+/* Replace with your SQL commands */
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS users (
@@ -9,36 +9,3 @@ CREATE TABLE IF NOT EXISTS users (
     last_name VARCHAR(50) NOT NULL ,
     password VARCHAR(255) NOT NULL
 ); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

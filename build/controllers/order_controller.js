@@ -17,7 +17,7 @@ const order = new order_model_1.default();
 // GET ALL
 const getMany = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield order.getMany(req.params.user_id);
+        const data = yield order.getMany();
         if (data.length === 0) {
             res.json({ message: 'No orders found', data: data
             });
@@ -40,7 +40,8 @@ const getAllActiveOrders = (req, res, next) => __awaiter(void 0, void 0, void 0,
             });
         }
         else {
-            res.json({ message: 'Active Orders retrieved successfully', data: activeOrders
+            res.json({ Results: activeOrders.length,
+                message: 'Active Orders retrieved successfully', data: activeOrders
             });
         }
     }
@@ -57,7 +58,7 @@ const getAllCompleteOrders = (req, res) => __awaiter(void 0, void 0, void 0, fun
             });
         }
         else {
-            res.json({ data: completeOrders });
+            res.json({ Results: completeOrders.length, data: completeOrders });
         }
     }
     catch (error) {
@@ -67,7 +68,7 @@ const getAllCompleteOrders = (req, res) => __awaiter(void 0, void 0, void 0, fun
 //CREATE
 const Create = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield order.create(req.params.id);
+        const data = yield order.create(req.params.user_id);
         res.status(201).json({ status: 'success', data, message: `Order Created successfully` });
     }
     catch (error) {
@@ -106,6 +107,7 @@ const getAllProductsForOrder = (req, res) => __awaiter(void 0, void 0, void 0, f
         }
         else {
             res.json({
+                Results: allProducts.length,
                 message: 'All Products retrieved successfully',
                 data: allProducts
             });

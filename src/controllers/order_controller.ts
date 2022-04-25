@@ -8,7 +8,7 @@ const order = new orderModel()
 // GET ALL
 const getMany = async (req:Request, res:Response , next:NextFunction)=>{
     try {
-        const data = await order.getMany(req.params.user_id as unknown as string);
+        const data = await order.getMany();
         if (data.length === 0) {
             res.json({ message: 'No orders found',data: data
             });
@@ -33,7 +33,8 @@ const getAllActiveOrders = async (req:Request, res:Response , next:NextFunction)
               res.json({message: 'No Active Orders', data: activeOrders
               });
             } else {
-              res.json({  message: 'Active Orders retrieved successfully', data: activeOrders
+              res.json({Results : activeOrders.length ,
+                  message: 'Active Orders retrieved successfully', data: activeOrders
               });
             }
           } catch (error) {
@@ -53,7 +54,7 @@ const getAllActiveOrders = async (req:Request, res:Response , next:NextFunction)
             res.json({ message: 'No Complete Orders', data: completeOrders
             });
           } else {
-            res.json({  data: completeOrders });
+            res.json({ Results : completeOrders.length , data: completeOrders });
           }
         } catch (error) {
           throw error;
@@ -64,7 +65,7 @@ const getAllActiveOrders = async (req:Request, res:Response , next:NextFunction)
 //CREATE
 const Create = async (req:Request, res:Response , next:NextFunction)=>{
             try {
-                const data = await order.create(req.params.id as unknown as string);
+                const data = await order.create(req.params.user_id as unknown as string);
                 res.status(201).json({ status: 'success' , data , message:`Order Created successfully`})
                 
             } catch (error) {
@@ -116,6 +117,7 @@ const deleteOne = async (req:Request, res:Response , next:NextFunction)=>{
         });
       } else {
         res.json({
+          Results : allProducts.length ,
           message: 'All Products retrieved successfully',
           data: allProducts
         });

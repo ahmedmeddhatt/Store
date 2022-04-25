@@ -7,7 +7,6 @@ import config from './config'
 import db from './database/index'
 import routes from './routes'
 
-console.log(process.env.ENV , 'okkkk');
 
 
 db.connect().then((Client)=>{

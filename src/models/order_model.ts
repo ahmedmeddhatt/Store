@@ -28,14 +28,14 @@ class orderModel {
     }
 
     // get all orders
-    async getMany(user_id:string):Promise<Order[]>{
+    async getMany():Promise<Order[]>{
         try {
             // connect to db
             const connection = await db.connect() ;    
              // run query 
              const data =  await connection.query(
-                'SELECT * FROM orders WHERE user_id = $1 ',
-                [user_id]
+                'SELECT * FROM orders',
+                
               ); 
               // release connection
               connection.release();

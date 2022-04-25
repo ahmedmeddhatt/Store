@@ -9,12 +9,15 @@ const auth_middleware_1 = __importDefault(require("../../middlewares/auth_middle
 const routes = (0, express_1.Router)();
 //adding route 
 // api/users
+routes.route('/')
+    .get(auth_middleware_1.default, order_controller_1.default.getMany);
 routes.route('/:user_id')
-    .get(auth_middleware_1.default, order_controller_1.default.getMany)
-    .get(auth_middleware_1.default, order_controller_1.default.getAllActiveOrders)
-    .get(auth_middleware_1.default, order_controller_1.default.getAllCompleteOrders)
     .post(auth_middleware_1.default, order_controller_1.default.Create)
     .put(auth_middleware_1.default, order_controller_1.default.updateOne)
     .delete(auth_middleware_1.default, order_controller_1.default.deleteOne);
+routes.route('/active/:user_id')
+    .get(auth_middleware_1.default, order_controller_1.default.getAllActiveOrders);
+routes.route('/complete/:user_id')
+    .get(auth_middleware_1.default, order_controller_1.default.getAllCompleteOrders);
 // api/users/id
 exports.default = routes;

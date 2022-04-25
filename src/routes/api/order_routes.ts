@@ -9,14 +9,21 @@ const routes = Router()
 
 // api/users
 
+routes.route('/')
+.get(validator , api.getMany)
+
 
 routes.route('/:user_id')
-.get(validator , api.getMany)
-.get(validator , api.getAllActiveOrders)
-.get(validator , api.getAllCompleteOrders)
 .post(validator ,api.Create) 
 .put(validator , api.updateOne)
 .delete(validator , api.deleteOne)
+
+routes.route('/active/:user_id')
+.get(validator , api.getAllActiveOrders)
+
+
+routes.route('/complete/:user_id')
+.get(validator , api.getAllCompleteOrders)
 
 
 // api/users/id

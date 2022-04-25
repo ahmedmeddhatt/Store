@@ -1,0 +1,45 @@
+DROP TABLE users;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE TABLE IF NOT EXISTS users (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY ,
+    email VARCHAR(50) UNIQUE ,
+    user_name VARCHAR(50) NOT NULL ,
+    first_name VARCHAR(50) NOT NULL ,
+    last_name VARCHAR(50) NOT NULL ,
+    password VARCHAR(255) NOT NULL
+); 
+
+
+DROP TABLE products;
+
+CREATE TABLE IF NOT EXISTS products (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    name VARCHAR(150) UNIQUE ,
+    price VARCHAR(50) NOT NULL ,
+    category VARCHAR(150) NOT NULL ,
+    image BYTEA NOT NULL
+    ); 
+
+DROP TABLE orders;
+
+    DROP TYPE IF EXISTS status;
+CREATE TYPE status AS ENUM ('active', 'complete');
+CREATE TABLE orders (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id uuid REFERENCES users(id) NOT NULL,
+    status status NOT NULL,
+    CONSTRAINT check_types CHECK (status = 'active' OR status = 'complete') ,
+    image BYTEA NOT NULL
+);
+
+DROP TABLE order_products;
+
+
+CREATE TABLE order_products (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    order_id uuid REFERENCES orders(id) NOT NULL,
+    quantity integer NOT NULL,
+    product_id uuid REFERENCES products(id) NOT NULL
+);
+
