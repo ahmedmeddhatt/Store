@@ -7,11 +7,12 @@ const routes = Router()
 
 //adding route 
 
-// api/users
+// api/orders
 
 routes.route('/')
 .get(validator , api.getMany)
 
+// api/orders/:user_id
 
 routes.route('/:user_id')
 .post(validator ,api.Create) 
