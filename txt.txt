@@ -17,8 +17,7 @@ CREATE TABLE IF NOT EXISTS products (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     name VARCHAR(150) UNIQUE ,
     price VARCHAR(50) NOT NULL ,
-    category VARCHAR(150) NOT NULL ,
-    image BYTEA NOT NULL
+    category VARCHAR(150) NOT NULL 
     ); 
 
 DROP TABLE orders;
@@ -29,8 +28,7 @@ CREATE TABLE orders (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     user_id uuid REFERENCES users(id) NOT NULL,
     status status NOT NULL,
-    CONSTRAINT check_types CHECK (status = 'active' OR status = 'complete') ,
-    image BYTEA NOT NULL
+    CONSTRAINT check_types CHECK (status = 'active' OR status = 'complete') 
 );
 
 DROP TABLE order_products;
