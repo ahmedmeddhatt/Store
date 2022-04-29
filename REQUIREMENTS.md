@@ -8,8 +8,6 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index 
 - Show
 - Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
 
 #### Users
 - Index [token required]
@@ -18,25 +16,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Completed Orders by user (args: user id)[token required]
+- 
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+- id uuid DEFAULT uuid_generate_v4() PRIMARY KEY
+- name VARCHAR(150) UNIQUE
+- price VARCHAR(50) NOT NULL
+- category VARCHAR(150) NOT NULL
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id uuid DEFAULT uuid_generate_v4() PRIMARY KEY
+- email VARCHAR(50) UNIQUE
+- user_name VARCHAR(50) NOT NULL
+- first_name VARCHAR(50) NOT NULL
+- last_name VARCHAR(50) NOT NULL
+- password VARCHAR(255) NOT NULL
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id uuid DEFAULT uuid_generate_v4() PRIMARY KEY
+- user_id uuid REFERENCES users(id) NOT NULL
+- status status NOT NULL
+- CONSTRAINT check_types CHECK (status = 'active' OR status = 'complete')
 
