@@ -1,4 +1,4 @@
-import { Product } from '../types/product_type';
+import Product from '../types/product_type';
 import db from '../database'
 
 

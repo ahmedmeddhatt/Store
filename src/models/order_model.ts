@@ -1,4 +1,4 @@
-import { Order } from '../types/order_type';
+import  Order  from '../types/order_type';
 import db from '../database'
 import ProductOrdersType from '../types/Product_orders_type';
 

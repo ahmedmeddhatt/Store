@@ -8,9 +8,10 @@ const order_controller_1 = __importDefault(require("../../controllers/order_cont
 const auth_middleware_1 = __importDefault(require("../../middlewares/auth_middleware"));
 const routes = (0, express_1.Router)();
 //adding route 
-// api/users
+// api/orders
 routes.route('/')
     .get(auth_middleware_1.default, order_controller_1.default.getMany);
+// api/orders/:user_id
 routes.route('/:user_id')
     .post(auth_middleware_1.default, order_controller_1.default.Create)
     .put(auth_middleware_1.default, order_controller_1.default.updateOne)

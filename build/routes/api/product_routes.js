@@ -8,11 +8,11 @@ const product_controler_1 = __importDefault(require("../../controllers/product_c
 const auth_middleware_1 = __importDefault(require("../../middlewares/auth_middleware"));
 const routes = (0, express_1.Router)();
 //adding route 
-// api/users
+// api/products
 routes.route('/')
     .get(product_controler_1.default.getMany)
     .post(auth_middleware_1.default, product_controler_1.default.Create);
-// api/users/id
+// api/products/id
 routes.route('/:id')
     .get(product_controler_1.default.getOne)
     .put(auth_middleware_1.default, product_controler_1.default.updateOne)
