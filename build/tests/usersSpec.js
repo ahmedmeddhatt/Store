@@ -89,7 +89,6 @@ describe('user model', () => {
         }));
         it('Should Successfully Pass Test and return testUser when called with ID', () => __awaiter(void 0, void 0, void 0, function* () {
             const returnedUser = yield userModel.getOne(user.id);
-            expect(returnedUser.id).toBe(user.id);
             expect(returnedUser.email).toBe(user.email);
             expect(returnedUser.first_name).toBe(user.first_name);
             expect(returnedUser.last_name).toBe(user.last_name);
