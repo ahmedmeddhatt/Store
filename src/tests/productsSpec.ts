@@ -6,7 +6,7 @@ import db from '../database';
 const productModel = new ProductsModel();
 const baseProduct: ProductType = {
   name: 'Farawla',
-  price: 50 as number,
+  price: '50' as string,
   category:'food'
 };
 let product: ProductType;
@@ -21,10 +21,10 @@ describe('Testing Model prroducts', () => {
     product = await productModel.create(baseProduct);
     expect({
       name: product.name,
-      price: product.price as Number ,
+      price: parseInt(product.price),
     }).toEqual({
       name: baseProduct.name,
-      price : baseProduct.price ,
+      price :  parseInt(baseProduct.price) ,
     });
   });
 
@@ -35,7 +35,7 @@ describe('Testing Model prroducts', () => {
   it('Testing the getMany method', async () => {
     allProducts = await productModel.getMany();
     expect({
-      price: allProducts.pop()!.price as Number,
+      price: allProducts.pop()!.price as string,
     }).toEqual({
       price: baseProduct.price,
     });

@@ -22,7 +22,7 @@ describe('order model', () => {
   const productModel = new ProductModel();
   const product = {
     name: 'testo',
-    price: 10 ,
+    price: '10' ,
     category :'food'
   } as ProductType;
 

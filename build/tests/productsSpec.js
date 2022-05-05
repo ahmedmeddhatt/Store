@@ -16,7 +16,7 @@ const product_model_1 = __importDefault(require("../models/product_model"));
 const productModel = new product_model_1.default();
 const baseProduct = {
     name: 'Farawla',
-    price: 50,
+    price: '50',
     category: 'food'
 };
 let product;
@@ -29,10 +29,10 @@ describe('Testing Model prroducts', () => {
         product = yield productModel.create(baseProduct);
         expect({
             name: product.name,
-            price: product.price,
+            price: parseInt(product.price),
         }).toEqual({
             name: baseProduct.name,
-            price: baseProduct.price,
+            price: parseInt(baseProduct.price),
         });
     }));
     it('Must have a getMany method', () => {

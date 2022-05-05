@@ -29,7 +29,7 @@ describe('order model', () => {
     const productModel = new product_model_1.default();
     const product = {
         name: 'testo',
-        price: 10,
+        price: '10',
         category: 'food'
     };
     const orderModel = new order_model_1.default();
