@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const product_model_1 = __importDefault(require("../models/product_model"));
 const productModel = new product_model_1.default();
 const baseProduct = {
-    name: 'Farawla',
+    name: 'ice cream',
     price: '50',
     category: 'food'
 };
@@ -60,17 +60,24 @@ describe('Testing Model prroducts', () => {
     it('Must have a update method', () => {
         expect(productModel.updateOne).toBeDefined();
     });
-    //   it('Testing the update method', async () => {
-    //     const updatedproduct = await productModel.updateOne({
-    //       id: product.id,
-    //       price: 234,
-    //     });
-    //     expect({
-    //       price: updatedproduct.price,
-    //     }).toEqual({
-    //       price: 234,
-    //     });
-    //   });
+    it('Testing the update method', () => __awaiter(void 0, void 0, void 0, function* () {
+        const pricex = 234;
+        const updatedproduct = yield productModel.updateOne({
+            id: product.id,
+            name: 'ice cream',
+            price: pricex.toString(),
+            category: 'food'
+        });
+        expect({
+            name: updatedproduct.name,
+            price: updatedproduct.price,
+            category: updatedproduct.category
+        }).toEqual({
+            name: 'ice cream',
+            price: pricex.toString(),
+            category: 'food'
+        });
+    }));
     it('Must have a delete method', () => {
         expect(productModel.deleteOne).toBeDefined();
     });

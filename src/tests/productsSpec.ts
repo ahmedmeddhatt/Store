@@ -1,11 +1,10 @@
 import ProductType from '../types/product_type';
 import ProductsModel from '../models/product_model';
-import db from '../database';
 
 
 const productModel = new ProductsModel();
 const baseProduct: ProductType = {
-  name: 'Farawla',
+  name: 'ice cream',
   price: '50' as string,
   category:'food'
 };
@@ -58,17 +57,24 @@ describe('Testing Model prroducts', () => {
     expect(productModel.updateOne).toBeDefined();
   });
 
-//   it('Testing the update method', async () => {
-//     const updatedproduct = await productModel.updateOne({
-//       id: product.id,
-//       price: 234,
-//     });
-//     expect({
-//       price: updatedproduct.price,
-//     }).toEqual({
-//       price: 234,
-//     });
-//   });
+  it('Testing the update method', async () => {
+    const pricex=234;
+    const updatedproduct = await productModel.updateOne({
+      id: product.id,
+      name:'ice cream' ,
+      price: pricex.toString(),
+      category:'food'
+    });
+    expect({
+      name: updatedproduct.name,
+      price: updatedproduct.price,
+      category: updatedproduct.category
+    }).toEqual({
+      name:'ice cream' ,
+      price: pricex.toString(),
+      category:'food'
+    });
+  });
 
   it('Must have a delete method', () => {
     expect(productModel.deleteOne).toBeDefined();

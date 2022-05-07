@@ -94,24 +94,21 @@ describe('user model', () => {
             expect(returnedUser.last_name).toBe(user.last_name);
             expect(returnedUser.user_name).toBe(user.user_name);
         }));
-        // it('Should Successfully Pass Test and return user with edited attributes', async () => {
-        //   const updatedUser = await userModel.updateOne(
-        //     user.id as unknown as string,
-        //     {
-        //       ...user,
-        //       email: 'test22@test.com',
-        //       first_name: 'userFname22',
-        //       last_name: 'userLname22',
-        //       user_name: 'userName22',
-        //       password: 'test12322'
-        //     }
-        //   );
-        //   expect(updatedUser.id).toBe(user.id);
-        //   expect(updatedUser.email).toBe('test22@test.com');
-        //   expect(updatedUser.first_name).toBe('userFname22');
-        //   expect(updatedUser.last_name).toBe('userLname22');
-        //   expect(updatedUser.user_name).toBe('userName22');
-        // });
+        it('Should Successfully Pass Test and return user with edited attributes', () => __awaiter(void 0, void 0, void 0, function* () {
+            const updatedUser = yield userModel.updateOne({
+                id: user.id,
+                email: 'test22@test.com',
+                first_name: 'userFname22',
+                last_name: 'userLname22',
+                user_name: 'userName22',
+                password: 'test12322'
+            });
+            expect(updatedUser.id).toBe(user.id);
+            expect(updatedUser.email).toBe('test22@test.com');
+            expect(updatedUser.first_name).toBe('userFname22');
+            expect(updatedUser.last_name).toBe('userLname22');
+            expect(updatedUser.user_name).toBe('userName22');
+        }));
         it('Should Successfully Pass Test and delete user from DB', () => __awaiter(void 0, void 0, void 0, function* () {
             const deletedUser = yield userModel.deleteOne(user.id);
             expect(deletedUser.id).toBe(user.id);

@@ -110,7 +110,8 @@ const deleteOne = async (req:Request, res:Response , next:NextFunction)=>{
 
 
 
-export default {Create,
+export default {
+        Create,
         getMany ,
         deleteOne ,
         getAllActiveOrders ,

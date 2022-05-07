@@ -95,7 +95,8 @@ const deleteOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         next(error);
     }
 });
-exports.default = { Create,
+exports.default = {
+    Create,
     getMany,
     deleteOne,
     getAllActiveOrders,

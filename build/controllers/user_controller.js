@@ -50,7 +50,15 @@ const Create = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
 //UPDATE
 const updateOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield user.updateOne(req.body);
+        const input = {
+            id: req.params.id,
+            email: req.body.email,
+            user_name: req.body.user_name,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            password: req.body.password
+        };
+        const data = yield user.updateOne(input);
         res.status(201).json({ status: 'success', data, message: `User Updated successfully` });
     }
     catch (error) {
@@ -84,7 +92,8 @@ const authentication = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         return next(error);
     }
 });
-exports.default = { Create,
+exports.default = {
+    Create,
     getMany,
     getOne,
     updateOne,

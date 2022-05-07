@@ -19,7 +19,7 @@ class userModel {
             values ($1 ,$2 ,$3 ,$4 ,$5) RETURNING id,email , user_name ,first_name ,last_name`
             // run query 
             const data = await connection.query(sql , [
-                u.email , u.user_name ,u.first_name ,u.last_name ,hashPassword(u.password)
+                u.email , u.user_name ,u.first_name ,u.last_name ,hashPassword(u.password as string)
             ])
             // release connection
             connection.release();
@@ -83,8 +83,8 @@ class userModel {
         RETURNING id,email , user_name ,first_name ,last_name` ;
 
          // run query 
-         const data = await connection.query(sql ,  [
-            u.email , u.user_name ,u.first_name ,u.last_name ,hashPassword(u.password) , u.id
+         const data = await connection.query(sql ,[
+            u.email , u.user_name ,u.first_name ,u.last_name ,hashPassword(u.password as string) , u.id
         ]) ;
           // release connection
           connection.release();
