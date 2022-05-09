@@ -31,6 +31,9 @@ const getMany = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 const getOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield user.getOne(req.params.id); // as unknown
+        if (!data) {
+            return res.status(404).json({ status: 'failed', message: `User Not Found` });
+        }
         res.status(200).json({ status: 'success', data, message: `User Reviewed successfully` });
     }
     catch (error) {
@@ -59,6 +62,9 @@ const updateOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function
             password: req.body.password
         };
         const data = yield user.updateOne(input);
+        if (!data) {
+            return res.status(404).json({ status: 'failed', message: `User Not Found` });
+        }
         res.status(201).json({ status: 'success', data, message: `User Updated successfully` });
     }
     catch (error) {
@@ -68,7 +74,10 @@ const updateOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function
 //DELETE
 const deleteOne = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield user.deleteOne(req.params.id); // as unknown
+        const data = yield user.deleteOne(req.params.id); // as unknown
+        if (!data) {
+            return res.status(404).json({ status: 'failed', message: `User Not Found` });
+        }
         res.status(200).json({ status: 'success', message: `User Deleted successfully` });
     }
     catch (error) {

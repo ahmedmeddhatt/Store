@@ -25,6 +25,9 @@ const getMany = async (req:Request, res:Response , next:NextFunction)=>{
 const getOne = async (req:Request, res:Response , next:NextFunction)=>{
         try {
             const data = await user.getOne(req.params.id as string); // as unknown
+            if(!data){
+                return res.status(404).json({ status: 'failed' , message:`User Not Found`})
+            }
             res.status(200).json({ status: 'success' , data , message:`User Reviewed successfully`})
             
         } catch (error) {
@@ -57,6 +60,9 @@ const updateOne = async (req:Request, res:Response , next:NextFunction)=>{
                 password: req.body.password
             };
             const data = await user.updateOne(input); 
+            if(!data){
+                return res.status(404).json({ status: 'failed' , message:`User Not Found`})
+            }
             res.status(201).json({ status: 'success' , data , message:`User Updated successfully`})
         } catch (error) {
             next(error)
@@ -69,7 +75,10 @@ const updateOne = async (req:Request, res:Response , next:NextFunction)=>{
 //DELETE
 const deleteOne = async (req:Request, res:Response , next:NextFunction)=>{
         try {
-             await user.deleteOne(req.params.id as string); // as unknown
+             const data = await user.deleteOne(req.params.id as string); // as unknown
+             if(!data){
+                return res.status(404).json({ status: 'failed' , message:`User Not Found`})
+            }
             res.status(200).json({ status: 'success' , message:`User Deleted successfully`})
             
         } catch (error) {
